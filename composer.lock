@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d4d0328a3bfc79d7e1eea8c0f503515",
+    "content-hash": "354fddc983284279c5d77aa903221402",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -988,16 +988,16 @@
         },
         {
             "name": "encore/laravel-admin",
-            "version": "v1.7.15",
+            "version": "v1.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/z-song/laravel-admin.git",
-                "reference": "f681aece0c2730e5d1082f9beb37243eb7d6e3c8"
+                "reference": "e3060ea62e6f625d0daf92ae5ef721469851c587"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/z-song/laravel-admin/zipball/f681aece0c2730e5d1082f9beb37243eb7d6e3c8",
-                "reference": "f681aece0c2730e5d1082f9beb37243eb7d6e3c8",
+                "url": "https://api.github.com/repos/z-song/laravel-admin/zipball/e3060ea62e6f625d0daf92ae5ef721469851c587",
+                "reference": "e3060ea62e6f625d0daf92ae5ef721469851c587",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1016,7 +1016,8 @@
                 "fzaninotto/faker": "~1.4",
                 "intervention/image": "~2.3",
                 "laravel/browser-kit-testing": "^6.0",
-                "laravel/laravel": ">=5.5"
+                "laravel/laravel": ">=5.5",
+                "spatie/phpunit-watcher": "^1.22.0"
             },
             "suggest": {
                 "intervention/image": "Required to handling and manipulation upload images (~2.3).",
@@ -1061,9 +1062,9 @@
             ],
             "support": {
                 "issues": "https://github.com/z-song/laravel-admin/issues",
-                "source": "https://github.com/z-song/laravel-admin/tree/v1.7.15"
+                "source": "https://github.com/z-song/laravel-admin/tree/v1.8.6"
             },
-            "time": "2020-04-27T07:15:45+00:00"
+            "time": "2020-09-27T03:07:05+00:00"
         },
         {
             "name": "endroid/qr-code",

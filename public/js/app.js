@@ -49538,7 +49538,9 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); //引入vue后引入省市县组件
+
+__webpack_require__(/*! ./components/SelectDistrict */ "./resources/js/components/SelectDistrict.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -49555,6 +49557,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
 
 var app = new Vue({
   el: '#app'
@@ -49607,6 +49610,152 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/components/SelectDistrict.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/SelectDistrict.js ***!
+  \***************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+var addressData = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module 'china-area-data/v5/data'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())); // 引入 lodash，lodash 是一个实用工具库，提供了很多常用的方法
+
+
+ // 注册一个名为 select-district 的 Vue 组件
+
+Vue.component('select-district', {
+  // 定义组件的属性
+  props: {
+    // 用来初始化省市区的值，在编辑时会用到
+    initValue: {
+      type: Array,
+      // 格式是数组
+      "default": function _default() {
+        return [];
+      } // 默认是个空数组
+
+    }
+  },
+  // 定义了这个组件内的数据
+  data: function data() {
+    return {
+      provinces: addressData['86'],
+      // 省列表
+      cities: {},
+      // 城市列表
+      districts: {},
+      // 地区列表
+      provinceId: '',
+      // 当前选中的省
+      cityId: '',
+      // 当前选中的市
+      districtId: '' // 当前选中的区
+
+    };
+  },
+  // 定义观察器，对应属性变更时会触发对应的观察器函数
+  watch: {
+    // 当选择的省发生改变时触发
+    provinceId: function provinceId(newVal) {
+      if (!newVal) {
+        this.cities = {};
+        this.cityId = '';
+        return;
+      } // 将城市列表设为当前省下的城市
+
+
+      this.cities = addressData[newVal]; // 如果当前选中的城市不在当前省下，则将选中城市清空
+
+      if (!this.cities[this.cityId]) {
+        this.cityId = '';
+      }
+    },
+    // 当选择的市发生改变时触发
+    cityId: function cityId(newVal) {
+      if (!newVal) {
+        this.districts = {};
+        this.districtId = '';
+        return;
+      } // 将地区列表设为当前城市下的地区
+
+
+      this.districts = addressData[newVal]; // 如果当前选中的地区不在当前城市下，则将选中地区清空
+
+      if (!this.districts[this.districtId]) {
+        this.districtId = '';
+      }
+    },
+    // 当选择的区发生改变时触发
+    districtId: function districtId() {
+      // 触发一个名为 change 的 Vue 事件，事件的值就是当前选中的省市区名称，格式为数组
+      this.$emit('change', [this.provinces[this.provinceId], this.cities[this.cityId], this.districts[this.districtId]]);
+    }
+  },
+  // 组件初始化时会调用这个方法
+  created: function created() {
+    this.setFromValue(this.initValue);
+  },
+  methods: {
+    //
+    setFromValue: function setFromValue(value) {
+      // 过滤掉空值
+      value = lodash__WEBPACK_IMPORTED_MODULE_0___default.a.filter(value); // 如果数组长度为0，则将省清空（由于我们定义了观察器，会联动触发将城市和地区清空）
+
+      if (value.length === 0) {
+        this.provinceId = '';
+        return;
+      } // 从当前省列表中找到与数组第一个元素同名的项的索引
+
+
+      var provinceId = lodash__WEBPACK_IMPORTED_MODULE_0___default.a.findKey(this.provinces, function (o) {
+        return o === value[0];
+      }); // 没找到，清空省的值
+
+
+      if (!provinceId) {
+        this.provinceId = '';
+        return;
+      } // 找到了，将当前省设置成对应的ID
+
+
+      this.provinceId = provinceId; // 由于观察器的作用，这个时候城市列表已经变成了对应省的城市列表
+      // 从当前城市列表找到与数组第二个元素同名的项的索引
+
+      var cityId = lodash__WEBPACK_IMPORTED_MODULE_0___default.a.findKey(addressData[provinceId], function (o) {
+        return o === value[1];
+      }); // 没找到，清空城市的值
+
+
+      if (!cityId) {
+        this.cityId = '';
+        return;
+      } // 找到了，将当前城市设置成对应的ID
+
+
+      this.cityId = cityId; // 由于观察器的作用，这个时候地区列表已经变成了对应城市的地区列表
+      // 从当前地区列表找到与数组第三个元素同名的项的索引
+
+      var districtId = lodash__WEBPACK_IMPORTED_MODULE_0___default.a.findKey(addressData[cityId], function (o) {
+        return o === value[2];
+      }); // 没找到，清空地区的值
+
+
+      if (!districtId) {
+        this.districtId = '';
+        return;
+      } // 找到了，将当前地区设置成对应的ID
+
+
+      this.districtId = districtId;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -49625,8 +49774,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\phpstudy8\phpstudy_pro\WWW\laravel-shop\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\phpstudy8\phpstudy_pro\WWW\laravel-shop\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\phpstudy_pro\WWW\laravel-shop\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\phpstudy_pro\WWW\laravel-shop\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

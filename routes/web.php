@@ -23,5 +23,7 @@ Auth::routes();
 
 Route::group(['middle' => ['auth']], function () {
     Route::get('user_addresses', 'UserAddressController@index')->name('user_addresses.index');
+
+    Route::get('user_addresses/create', 'UserAddressController@create')->name('user_addresses.create');
 });
 
