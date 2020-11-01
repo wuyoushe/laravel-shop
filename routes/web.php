@@ -21,3 +21,7 @@ Route::get('/', 'PagesController@root')->name('root');
 
 Auth::routes();
 
+Route::group(['middle' => ['auth']], function () {
+    Route::get('user_addresses', 'UserAddressController@index')->name('user_addresses.index');
+});
+
