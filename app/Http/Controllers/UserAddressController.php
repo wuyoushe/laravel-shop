@@ -16,6 +16,6 @@ class UserAddressController extends Controller
 
     public function create()
     {
-        return view('user_address.create_and_edit', ['address' => new UserAddress()]);
+        return view('user_addresses.create_and_edit', ['address' => new UserAddress()]);
     }
 }
