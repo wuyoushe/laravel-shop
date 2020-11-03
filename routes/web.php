@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
-Route::get('/', 'PagesController@root')->name('root');
+Route::redirect('/', '/products')->name('root');
+Route::get('products', 'ProductsController@index')->name('products.index');
 
 Auth::routes();
 
@@ -25,5 +26,7 @@ Route::group(['middle' => ['auth']], function () {
     Route::get('user_addresses', 'UserAddressController@index')->name('user_addresses.index');
 
     Route::get('user_addresses/create', 'UserAddressController@create')->name('user_addresses.create');
+
+    Route::get('products', 'ProductsController@index')->name('products.index');
 });
 

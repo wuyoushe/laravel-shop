@@ -435,6 +435,16 @@ return [
                 'theme' => 'snow',
                 'height' => '200px',
             ]
-        ]
+            ],
+            'wang-editor' => [
+
+                // 如果要关掉这个扩展，设置为false
+                'enable' => true,
+
+                // 编辑器的配置
+                'config' => [
+
+                ]
+            ]
             ],
 ];
