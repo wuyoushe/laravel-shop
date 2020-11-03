@@ -7,10 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Models\UserAddress;
+use Encore\Admin\Traits\DefaultDatetimeFormat;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,DefaultDatetimeFormat;
 
     /**
      * The attributes that are mass assignable.
