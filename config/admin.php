@@ -85,7 +85,7 @@ return [
     | Html title for all pages.
     |
     */
-    'title' => 'Admin',
+    'title' => 'Laravel Shop 管理后台',
 
     /*
     |--------------------------------------------------------------------------
