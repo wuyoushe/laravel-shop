@@ -63,7 +63,6 @@
         $('.search-form input[name=search]').val(filters.search);
         $('.search-form select[name=order]').val(filters.order);
         $('.search-form select[name=order]').on('change', function() {
-            console.log('111');
             $('.search-form').submit();
         });
     })

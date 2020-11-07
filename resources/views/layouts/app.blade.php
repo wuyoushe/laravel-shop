@@ -20,5 +20,7 @@
 </div>
 <!-- JS 脚本 -->
 <script src="{{ mix('js/app.js') }}"></script>
+<!--在layout模板里添加yield，然后在需要添加js的页面使用 @section('name') @endsection -->
+@yield('scriptsAfterJs')
 </body>
 </html>
