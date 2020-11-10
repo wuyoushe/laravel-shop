@@ -18,4 +18,9 @@ class CartItem extends Model
     {
         return $this->belongsTo(ProductSku::class);
     }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

@@ -13,8 +13,9 @@ class CartController extends Controller
     {
         //with()方法来预加载购物车里的商品和SKU信息
         $cartItems = $request->user()->cartItems()->with(['productSku.product'])->get();
+        $addresses = $request->user()->addresses()->orderBy('last_used_at', 'desc')->get();
 
-        return view('cart.index', ['cartItems' => $cartItems]);
+        return view('cart.index', ['cartItems' => $cartItems, 'addresses' => $addresses]);
     }
 
     public function add(AddCartRequest $request)
