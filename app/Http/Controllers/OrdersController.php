@@ -9,10 +9,23 @@ use App\Models\Order;
 use Carbon\Carbon;
 
 use App\Exceptions\InvalidRequestException;
+use App\Jobs\CloseOrder;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        $orders = Order::query()
+        ->with(['items.product', 'items.productSku'])
+        ->where('user_id', $request->user()->id)
+        ->orderBy('created_at', 'desc')
+        ->paginate();
+
+        return view('orders.index', ['orders' => $orders]);
+    }
+
     public function store(Request $request)
     {
         $user = $request->user();
@@ -66,6 +79,8 @@ class OrdersController extends Controller
 
             return $order;
         });
+
+        $this->dispatch(new CloseOrder($order, config('app.order_ttl')));
 
         return $order;
     }
