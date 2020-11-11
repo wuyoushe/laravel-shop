@@ -14,6 +14,12 @@ use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
+    public function show(Order $order, Request $request)
+    {
+//        load() 称为延迟加载，不同点在于load()是在已经查询出来的模型上调用，而with()则是在ORM查询构造器上调用
+        $this->authorize('own', $order);
+        return view('orders.show', ['order' => $order->load(['items.productSku', 'items.product'])]);
+    }
 
     public function index(Request $request)
     {
