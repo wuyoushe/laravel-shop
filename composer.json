@@ -20,7 +20,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "overtrue/laravel-lang": "^4.1",
-        "yansongda/pay": "^2.9"
+        "yansongda/pay": "^2.10"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "~3.2",
