@@ -16,4 +16,6 @@ Route::group([
 
     $router->get('users', 'UsersController@index');
 
+    $router->resource('orders', OrdersController::class);
+
 });
