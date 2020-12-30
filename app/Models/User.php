@@ -6,9 +6,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail
+use App\Models\UserAddress;
+use App\Models\Product;
+use Encore\Admin\Traits\DefaultDatetimeFormat;
+
+class User extends Authenticatable
+
 {
-    use Notifiable;
+    use Notifiable,DefaultDatetimeFormat;
 
     /**
      * The attributes that are mass assignable.
@@ -40,5 +45,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function addresses()
     {
         return $this->hasMany(UsereAddress::class);
+    }
+
+    /**
+     * User模型增加与商品关联关系
+     */
+    public function favoriteProducts()
+    {
+        return $this->belongsToMany(Product::class, 'user_favorite_products')
+            ->withTimestamps()
+            ->orderBy('user_favorite_products.created_at', 'desc');
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
     }
 }

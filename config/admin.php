@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Laravel-admin',
+    'name' => 'Laravel-shop',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
     | Html title for all pages.
     |
     */
-    'title' => 'Admin',
+    'title' => 'Laravel Shop 管理后台',
 
     /*
     |--------------------------------------------------------------------------
@@ -290,7 +290,9 @@ return [
     | "sidebar-mini".
     |
     */
-    'layout' => ['sidebar-mini', 'sidebar-collapse'],
+    // 'layout' => ['sidebar-mini', 'sidebar-collapse'],
+
+    'layout' => ['sidebar-mini'],
 
     /*
     |--------------------------------------------------------------------------
@@ -396,6 +398,53 @@ return [
     |
     */
     'extensions' => [
+        // 新增编辑器配置开始
+        'quill' => [
+            // If the value is set to false, this extension will be disabled
+            'enable' => true,
+            'config' => [
+                'modules' => [
+                    'syntax' => true,
+                    'toolbar' =>
+                        [
+                            ['size' => []],
+                            ['header' => []],
+                            'bold',
+                            'italic',
+                            'underline',
+                            'strike',
+                            ['script' => 'super'],
+                            ['script' => 'sub'],
+                            ['color' => []],
+                            ['background' => []],
+                            'blockquote',
+                            'code-block',
+                            ['list' => 'ordered'],
+                            ['list' => 'bullet'],
+                            ['indent' => '-1'],
+                            ['indent' => '+1'],
+                            'direction',
+                            ['align' => []],
+                            'link',
+                            'image',
+                            'video',
+                            'formula',
+                            'clean'
+                        ],
+                ],
+                'theme' => 'snow',
+                'height' => '200px',
+            ]
+            ],
+            'wang-editor' => [
 
-    ],
+                // 如果要关掉这个扩展，设置为false
+                'enable' => true,
+
+                // 编辑器的配置
+                'config' => [
+
+                ]
+            ]
+            ],
 ];
