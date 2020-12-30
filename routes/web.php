@@ -20,7 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/products')->name('root');
 Route::get('products', 'ProductsController@index')->name('products.index');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+
+Route::group(['middle' => ['auth', 'verified']], function (){
+    Route::get('user_addresses', 'UserAddressesController@index')->name('user_addresses.index');
+});
 
 Route::group(['middle' => ['auth']], function () {
     Route::get('user_addresses', 'UserAddressController@index')->name('user_addresses.index');

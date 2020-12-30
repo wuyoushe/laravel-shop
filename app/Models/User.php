@@ -11,6 +11,7 @@ use App\Models\Product;
 use Encore\Admin\Traits\DefaultDatetimeFormat;
 
 class User extends Authenticatable
+
 {
     use Notifiable,DefaultDatetimeFormat;
 
@@ -43,7 +44,7 @@ class User extends Authenticatable
 
     public function addresses()
     {
-        return $this->hasMany(UserAddress::class);
+        return $this->hasMany(UsereAddress::class);
     }
 
     /**
