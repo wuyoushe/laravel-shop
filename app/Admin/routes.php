@@ -18,4 +18,6 @@ Route::group([
 
     $router->resource('orders', OrdersController::class);
 
+    $router->get('orders/{order}', 'OrdersController@show')->name('admin.orders.show');
+
 });
