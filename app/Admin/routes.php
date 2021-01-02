@@ -20,4 +20,5 @@ Route::group([
 
     $router->get('orders/{order}', 'OrdersController@show')->name('admin.orders.show');
 
+    $router->post('orders/{order}/ship', 'OrderController@ship')->name('admin.orders.ship');
 });
