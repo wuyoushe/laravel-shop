@@ -16,9 +16,36 @@ Route::group([
 
     $router->get('users', 'UsersController@index');
 
-    $router->resource('orders', OrdersController::class);
+    $router->get('orders', 'OrdersController@index')->name('admin.orders.index');
 
     $router->get('orders/{order}', 'OrdersController@show')->name('admin.orders.show');
 
     $router->post('orders/{order}/ship', 'OrderController@ship')->name('admin.orders.ship');
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
