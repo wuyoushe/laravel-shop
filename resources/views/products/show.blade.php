@@ -98,6 +98,7 @@
       $('.product-info .price span').text($(this).data('price'));
       $('.product-info .stock').text('库存：' + $(this).data('stock') + '件');
     });
+    //监听收藏按钮的点击事件
     $('.btn-favor').click(function () {
       // 发起一个 post ajax 请求，请求 url 通过后端的 route() 函数生成。
       axios.post('{{ route('products.favor', ['product' => $product->id]) }}')
@@ -167,8 +168,6 @@
         }
       })
     });
-
-
   });
 </script>
 @endsection
