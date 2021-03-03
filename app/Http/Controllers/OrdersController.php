@@ -146,7 +146,8 @@ class OrdersController extends Controller
         $order->update(['ship_status' => Order::SHIP_STATUS_RECEIVED]);
 
         //返回原页面
-        return redirect()->back();
+//        return redirect()->back();
+        return $order;
     }
 
     public function review(Order $order)
