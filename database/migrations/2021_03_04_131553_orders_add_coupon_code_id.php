@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class OrdersAddCouponCodeId extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('orders', function (Blueprint $table) {
+            $table->unsignedBigInteger('coupon_code_id')->nullable()->after('paid_at');
+            $table->foreign('coupon_code_id')->references('id')->on('coupon_codes')->onDelete('set null');
+            //onDelete('set null') 代表如果这个订单有关联优惠券并且该优惠券被删除时将自动把coupon_code_id设成null
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropForeign(['coupon_code_id']);
+            $table->dropColumn('coupon_code_id');
+        });
+    }
+}

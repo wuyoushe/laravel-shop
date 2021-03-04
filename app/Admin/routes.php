@@ -22,6 +22,8 @@ Route::group([
 
     $router->post('orders/{order}/ship', 'OrderController@ship')->name('admin.orders.ship');
 
+    $router->resource('coupon-codes', CouponCodesController::class);
+
 });
 
 
