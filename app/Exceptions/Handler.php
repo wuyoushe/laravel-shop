@@ -14,7 +14,8 @@ class Handler extends ExceptionHandler
      */
     protected $dontReport = [
         //添加自定义的异常
-        InvalidRequestException::class
+        InvalidRequestException::class,
+        CouponCodeUnavailableException::class,
 
     ];
 

@@ -62,6 +62,8 @@ Route::group(['middle' => ['auth']], function () {
     Route::get('orders/{order}/review', 'OrdersController@review')->name('orders.review.show');
 
     Route::post('orders/{order}/review', 'OrdersController@sendReview')->name('orders.review.store');
+
+    Route::get('coupon_codes/{code}', 'CouponCodesController@show')->name('coupon_codes.show');
 });
 
 Route::post('payment/alipay/notify', 'PaymentController@alipayNotify')->name('payment.alipay.notify');
