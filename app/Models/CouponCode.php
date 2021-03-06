@@ -68,7 +68,7 @@ class CouponCode extends Model
         return $code;
     }
 
-    public function checkAvailable($orderAmount = null)
+    public function checkAvailable(Useer $user, $orderAmount = null)
     {
         if (!$this->enabled) {
             throw new CouponCodeUnavailableException('优惠券不存在');
@@ -88,6 +88,24 @@ class CouponCode extends Model
 
         if (!is_null($orderAmount) && $orderAmount < $this->min_amount) {
             throw new CouponCodeUnavailableException('订单金额不满足该优惠券最低金额');
+        }
+
+        //where 添加 orWhere  在where里做回调查询我们代码中使用 where(function($query) {})
+        // 嵌套是用来生成的 SQL 里的括号，保证不会因为 or 关键字导致我们的查出来的结果与期望不符
+        $used = Order::where('user_id', $user->id)
+            ->where('coupon_code_id', $this->id)
+            ->where(function($query) {
+                $query->where(function($query) {
+                    $query->whereNull('paid_at')
+                        ->where('closed', false);
+                })->orWhere(function($query) {
+                    $query->whereNotNull('paid_at')
+                        ->where('refund_status', '!=', Order::REFUND_STATUS_SUCCESS);
+                });
+            })
+            ->exists();
+        if ($used) {
+            throw new CouponCodeUnavailableException('你已经使用过这张优惠券了');
         }
     }
 
